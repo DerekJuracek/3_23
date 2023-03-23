@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>NE Voter Turnout</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <!-- <div id="splash-screen">
+      <div id="splash-content">
+        <h4>Welcome to the Voter Turnout Project by Civic Nebraska!</h4>
+        <p id="splash-text">Click the button below to explore voter turnout in Nebraska! Voter Turnout represents the total number of ballots cast out of the total
+           number of registered voters in the November 2022 General Election. Type in an address, ZIP code, city, or county in the search bar and then zoom in to 
+           view a specific area. When you click or tap within your chosen area, you will see a pop-up appear with more information. Voter turnout data is from the Nebraska Secretary of State's records and is available at the Census tract, ZIP code, and County level (under the 'Select Data' menu). Demographic data are available at the Census tract level and are taken from the Census Bureau's American Community Survey 2021 1-year estimates. </p>
+        <button id="splash-close">View Map</button>
+      </div>
+    </div> -->
+    <nav id="menu" class="navbar navbar-expand-lg navbar-light bg-light fixed-top w-100">
+      <a class="navbar-brand" href="#"> Nebraska Voter Turnout
+        <img src="_Civic Nebraska Logo - Black - 70px.png" alt="Nebraska Voter Turnout" class="ms-2" height="30" width="30">
+      </a> </a>
+      <div class="d-flex ml-auto">
+        <div id="geocoder"></div>
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 Select Data        
+          </a>
+        <div class="dropdown-menu scrollable-dropdown" aria-labelledby="navbarDropdownMenuLink">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="clexfr7cx000h01mzika7ykfc" value="option1" checked>
+            <label class="form-check-label" for="exampleRadios1">
+              Voter Turnout by Census Tract
+            </label> 
+          </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="clexfyjaa000101rumyqaonzb" value="option2">
+          <label class="form-check-label" for="exampleRadios2">
+            Voter Turnout by Zip-Code
+          </label>  
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="clexg301o001e01tjbvu4n3v6" value="option3">
+          <label class="form-check-label" for="exampleRadios3">
+            Voter Turnout by County
+          </label>
+        </div>
+        <hr class="custom-line">
+           <!-- New label element -->
+      <label class="form-check-label center-label" for="clexfr7cx000h01mzika7ykfc" id="dropdown-label">
+        <b>Demographic Maps</b> 
+      </label><hr class="custom-line">
+      <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="clewoj4kq000501nzxujmb2ua" value="option3">
+          <label class="form-check-label" for="exampleRadios2">
+            Median HH Income
+          </label> 
+        </div>
+     
+     <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="clewnf117001a01pfv1micysu" value="option5">
+          <label class="form-check-label" for="exampleRadios2">
+            Homes Below Poverty Level
+          </label>
+     </div>
+     <div class="form-check">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="clevcmuzx00a101mgh3v8k4tv" value="option5">
+        <label class="form-check-label" for="exampleRadios2">
+           Homes Above Poverty Level
+        </label> 
+     </div>
+     <div class="form-check">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="clewnra2m000701lnes3cxf9s" value="option5">
+        <label class="form-check-label" for="exampleRadios2">
+          Homes w/ one or more person w/ Disability
+        </label>
+      </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="clewo1pjf000101o3e3dom768" value="option5">
+          <label class="form-check-label" for="exampleRadios2">
+            Homes with person over 60
+          </label> 
+      </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="clewodoxw000401pjsyljoonj" value="option5">
+          <label class="form-check-label" for="exampleRadios2">
+            Homes w/ Children Under 18
+          </label> 
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="clexfewjc001801pbydx9y2ha" value="option5">
+          <label class="form-check-label" for="exampleRadios2">
+            White Householders
+          </label> 
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="clexf4tei000301pogtuiyqr4" value="option5">
+          <label class="form-check-label" for="exampleRadios2">
+            Hispanic or Latino Householders
+          </label> 
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="clexf9z8d003v01trzgu99jha" value="option5">
+          <label class="form-check-label" for="exampleRadios2">
+            Asian Householders
+          </label> 
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="clexfleuq003b01pgk110zhg6" value="option5">
+          <label class="form-check-label" for="exampleRadios2">
+            Black Householders
+          </label> 
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="clexec5sf001901msxnv4lg37" value="option5">
+          <label class="form-check-label" for="exampleRadios2">
+            American Indian Householders
+          </label> 
+        
+      </div>
+    </nav>
+    <div id="legend-master">
+      <div id="voter-legend" class="legend1">
+        <h4>Voter Turnout by Census Tract</h4>
+        <div><span style="background-color: #150d3f"></span>0-40%</div>
+        <div><span style="background-color: #8909f1"></span>40-50%</div>
+        <div><span style="background-color: #e8ddf3"></span>50-60%</div>
+        <div><span style="background-color: #f8cfb4"></span>60-70%</div>
+        <div><span style="background-color: #f3885d"></span>70-100%</div>
+      </div>
+      <div id="voter-legendZC" class="legend2">
+        <h4>Voter Turnout by Zip-Code</h4>
+        <div><span style="background-color: #150d3f"></span>0-40%</div>
+        <div><span style="background-color: #8909f1"></span>40-50%</div>
+        <div><span style="background-color: #e8ddf3"></span>50-60%</div>
+        <div><span style="background-color: #f8cfb4"></span>60-70%</div>
+        <div><span style="background-color: #f3885d"></span>70-100%</div>
+      </div>
+      <div id="voter-legendC" class="legend3">
+        <h4>Voter Turnout by County</h4>
+        <div><span style="background-color: #150d3f"></span>0-40%</div>
+        <div><span style="background-color: #8909f1"></span>40-50%</div>
+        <div><span style="background-color: #e8ddf3"></span>50-60%</div>
+        <div><span style="background-color: #f8cfb4"></span>60-70%</div>
+        <div><span style="background-color: #f3885d"></span>70-100%</div>
+      </div>
+      <div id="income-legend" class="legend4">
+        <h4>Median Income</h4>
+        <div>
+          <span style="background-color: #150d3f"></span>$20,000-$40,000
+        </div>
+        <div>
+          <span style="background-color: #8909f1"></span>$40,000-$50,000
+        </div>
+        <div>
+          <span style="background-color: #e8ddf3"></span>$50,000-$60,000
+        </div>
+        <div>
+          <span style="background-color: #f8cfb4"></span>$60,000-$75,000
+        </div>
+        <div><span style="background-color: #f3885e"></span>$75,000 and Greater</div>
+      </div>
+      <div id="belowP-legend" class="legend5">
+        <h4>Below Poverty Level</h4>
+        <div><span style="background-color: #150d3f"></span>0-10%</div>
+        <div><span style="background-color: #8909f1"></span>10-20%</div>
+        <div><span style="background-color: #e8ddf3"></span>20-25%</div>
+        <div><span style="background-color: #f8cfb4"></span>25-30%</div>
+        <div>
+          <span style="background-color: #f3885e"></span>30% and Greater
+        </div>
+      </div>
+      <div id="aboveP-legend" class="legend6">
+        <h4>Above Poverty Level</h4>
+        <div><span style="background-color: #150d3f"></span>0-65%</div>
+        <div><span style="background-color: #8909f1"></span>65-75%</div>
+        <div><span style="background-color: #e8ddf3"></span>75-85%</div>
+        <div><span style="background-color: #f8cfb4"></span>85-95%</div>
+        <div>
+          <span style="background-color: #f3885e"></span>95% and Greater
+        </div>
+      </div>
+      <div id="disability-legend" class="legend7">
+        <h4>Homes w/ Person w/ Disability</h4>
+        <div><span style="background-color: #150d3f"></span>0-20%</div>
+        <div><span style="background-color: #8909f1"></span>20-30%</div>
+        <div><span style="background-color: #e8ddf3"></span>30-35%</div>
+        <div><span style="background-color: #f8cfb4"></span>35-40%</div>
+        <div>
+          <span style="background-color: #f3885e"></span>40% and Greater
+        </div>
+      </div>
+      <div id="plus60-legend" class="legend8">
+        <h4>Homes w/ Person Over 60</h4>
+        <div><span style="background-color: #150d3f"></span>0-20%</div>
+        <div><span style="background-color: #8909f1"></span>20-30%</div>
+        <div><span style="background-color: #e8ddf3"></span>30-40%</div>
+        <div><span style="background-color: #f8cfb4"></span>40-50%</div>
+        <div>
+          <span style="background-color: #f3885e"></span>50% and Greater
+        </div>
+      </div>
+      <div id="children-legend" class="legend9">
+        <h4>Homes w/ Children under 18</h4>
+        <div><span style="background-color: #150d3f"></span>0-15%</div>
+        <div><span style="background-color: #8909f1"></span>15-25%</div>
+        <div><span style="background-color: #e8ddf3"></span>25-45%</div>
+        <div><span style="background-color: #f8cfb4"></span>45-60%</div>
+        <div>
+          <span style="background-color: #f3885e"></span>60% and Greater
+        </div>
+      </div>
+      <div id="white-legend" class="legend10">
+        <h4>White Households Alone</h4>
+        <div><span style="background-color: #150d3f"></span>0-80%</div>
+        <div><span style="background-color: #8909f1"></span>80-85%</div>
+        <div><span style="background-color: #e8ddf3"></span>85-90%</div>
+        <div><span style="background-color: #f8cfb4"></span>90-95%</div>
+        <div>
+          <span style="background-color: #f3885e"></span>95% and Greater
+        </div>
+      </div>
+      <div id="hl-legend" class="legend11">
+        <h4>Hispanic/Latino Households Alone</h4>
+        <div><span style="background-color: #150d3f"></span>0-5%</div>
+        <div><span style="background-color: #8909f1"></span>5-10%</div>
+        <div><span style="background-color: #e8ddf3"></span>10-15%</div>
+        <div><span style="background-color: #f8cfb4"></span>15-20%</div>
+        <div>
+          <span style="background-color: #f3885e"></span>20% and Greater
+        </div>
+      </div>
+      <div id="asian-legend" class="legend12">
+        <h4>Asian Households Alone</h4>
+        <div><span style="background-color: #150d3f"></span>0-1%</div>
+        <div><span style="background-color: #8909f1"></span>1-2%</div>
+        <div><span style="background-color: #e8ddf3"></span>2-5%</div>
+        <div><span style="background-color: #f8cfb4"></span>5-10%</div>
+        <div>
+          <span style="background-color: #f3885e"></span>10% and Greater
+        </div>
+      </div>
+      <div id="black-legend" class="legend13">
+        <h4>Black Households Alone</h4>
+        <div><span style="background-color: #150d3f"></span>0-0.5%</div>
+        <div><span style="background-color: #8909f1"></span>0.5-1%</div>
+        <div><span style="background-color: #e8ddf3"></span>1-5%</div>
+        <div><span style="background-color: #f8cfb4"></span>5-10%</div>
+        <div>
+          <span style="background-color: #f3885e"></span>10% and Greater
+        </div>
+      </div>
+      <div id="indian-legend" class="legend14">
+        <h4>Am. Indian Households Alone</h4>
+        <div><span style="background-color: #150d3f"></span>0-1%</div>
+        <div><span style="background-color: #8909f1"></span>1-2%</div>
+        <div><span style="background-color: #e8ddf3"></span>2-5%</div>
+        <div><span style="background-color: #f8cfb4"></span>5-10%</div>
+        <div>
+          <span style="background-color: #f3885e"></span>10% and Greater
+        </div>
+      </div>
+      <div id="splash-screen">
+        <div id="splash-content">
+          <h4>Welcome to the Voter Turnout Project by Civic Nebraska!</h4>
+          <p id="splash-text">Click the button below to explore voter turnout in Nebraska! Voter Turnout represents the total number of ballots cast out of the total
+             number of registered voters in the November 2022 General Election. Type in an address, ZIP code, city, or county in the search bar and then zoom in to 
+             view a specific area. When you click or tap within your chosen area, you will see a pop-up appear with more information. Voter turnout data is from the Nebraska Secretary of State's records and is available at the Census tract, ZIP code, and County level (under the 'Select Data' menu). Demographic data are available at the Census tract level and are taken from the Census Bureau's American Community Survey 2021 1-year estimates. </p>
+          <button id="splash-close">View Map</button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

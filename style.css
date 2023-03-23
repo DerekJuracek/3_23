@@ -1,0 +1,248 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+/* Splash screen styles */
+#splash-screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#splash-content {
+  text-align: center;
+}
+#splash-close {
+  cursor: pointer;
+}
+
+#splash-text {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+h6 {
+  font-weight: bold;
+}
+
+div.form-check {
+  margin-left: 2px;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+#main {
+  margin-right: 2em;
+}
+
+.btn {
+  width: 12em;
+}
+
+a#navbarDropdownMenuLink.nav-link.dropdown-toggle {
+  color: black;
+  padding-right: 24px;
+}
+
+.scrollable-dropdown {
+  max-height: 450px; /* Set the maximum height for the dropdown menu */
+  overflow-y: auto; /* Enable vertical scrolling when the content overflows */
+}
+.center-label {
+  text-align: center;
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.custom-line {
+  border-top: 1px solid #ccc; /* Line color and thickness */
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.mapboxgl-popup {
+  max-width: 500px;
+  font: 12px/20px "Open Sans", sans-serif;
+  background-color: #fff;
+  border-radius: 3px;
+}
+
+div#legend-master {
+  font-family: "the serif", sans-serif;
+}
+
+.legend1,
+.legend2,
+.legend3,
+.legend4,
+.legend5,
+.legend6,
+.legend7,
+.legend8,
+.legend9,
+.legend10,
+.legend11,
+.legend12,
+.legend13,
+.legend14 {
+  background-color: #fff;
+  border-radius: 3px;
+  bottom: 30px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+  z-index: 1;
+}
+
+.legend1 h4,
+.legend2 h4,
+.legend3 h4,
+.legend4 h4,
+.legend5 h4,
+.legend6 h4,
+.legend7 h4,
+.legend8 h4,
+.legend9 h4,
+.legend10 h4,
+.legend11 h4,
+.legend12 h4,
+.legend13 h4,
+.legend14 h4 {
+  margin: 0 0 10px;
+}
+
+.legend1 div span,
+.legend2 div span,
+.legend3 div span,
+.legend4 div span,
+.legend5 div span,
+.legend6 div span,
+.legend7 div span,
+.legend8 div span,
+.legend9 div span,
+.legend10 div span,
+.legend11 div span,
+.legend12 div span,
+.legend13 div span,
+.legend14 div span {
+  border-radius: 20%;
+  display: inline-block;
+  height: 10px;
+  margin-right: 5px;
+  width: 10px;
+}
+.legend2,
+.legend3,
+.legend4,
+.legend5,
+.legend6,
+.legend7,
+.legend8,
+.legend9,
+.legend10,
+.legend11,
+.legend12,
+.legend13,
+.legend14 {
+  display: none;
+}
+
+div#voter-legend.legend1,
+div#voter-legendZC.legend2,
+div#voter-legendC.legend3,
+div#income-legend.legend4,
+div#belowP-legend.legend5,
+div#aboveP-legend.legend6,
+div#disability-legend.legend7,
+div#plus60-legend.legend8,
+div#children-legend.legend9,
+div#white-legend.legend10,
+div#hl-legend.legend11,
+div#asian-legend.legend12,
+div#black-legend.legend13,
+div#indian-legend.legend14 {
+  font-family: "the serif", sans-serif;
+}
+
+input[type="radio"]#cldnq390d003n01pz0zzaiyri {
+  accent-color: #0e2a4b;
+}
+
+input[type="radio"]#cldrrte7c004r01p1yznwm06e {
+  accent-color: #0e2a4b;
+}
+
+input[type="radio"]#cldos7f3k001g01phn2a4chqs {
+  accent-color: #0e2a4b;
+}
+input[type="radio"]#cldosdfe1004b01mye32nxrxe {
+  accent-color: #0e2a4b;
+}
+
+input[type="radio"]#cldosiygr001k01o3jk8gm8dj {
+  accent-color: #0e2a4b;
+}
+
+input[type="radio"]#cldnss1x4002c01myabedghax {
+  accent-color: #0e2a4b;
+}
+input[type="radio"]#cldotih7h001p01mhhlo61jni {
+  accent-color: #0e2a4b;
+}
+
+input[type="radio"]#cldnsz24b001t01lttai1x1l3 {
+  accent-color: #0e2a4b;
+}
+
+input[type="radio"]#cldorzs59001f01ph42y8dd6c {
+  accent-color: #0e2a4b;
+}
+input[type="radio"]#cldnskbs1006o01qhc074d4so {
+  accent-color: #0e2a4b;
+}
+
+input[type="radio"]#cldnsdzmj006n01qhwmn8a518 {
+  accent-color: #0e2a4b;
+}
+
+input[type="radio"]#cldnrywk5001r01ltey2ciqa1 {
+  accent-color: #0e2a4b;
+}
+
+input[type="radio"]#cldns58yf000201s6v2o1tyqz {
+  accent-color: #0e2a4b;
+}
+
+input[type="radio"]#cldxps0sh002a01piid30h7vb {
+  accent-color: #0e2a4b;
+}
+
+div.form-check:hover {
+  background-color: #c0c6d2;
+}
+
+#features {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.legend1 {
+  display: none;
+}
