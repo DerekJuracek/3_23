@@ -11,8 +11,14 @@ const map = new mapboxgl.Map({
 });
 document.getElementById("splash-close").addEventListener("click", function () {
   document.getElementById("splash-screen").style.display = "none";
+  const dropdownToggle = document.getElementById("navbarDropdownMenuLink");
+  dropdownToggle.classList.remove("disabled");
+  dropdownToggle.removeAttribute("tabindex");
   const legend1 = document.getElementById("voter-legend");
   legend1.style.display = "block";
+  var geocoderInput = document.querySelector(".mapboxgl-ctrl-geocoder input");
+  geocoderInput.removeAttribute("disabled");
+  geocoderInput.classList.remove("disabled");
 });
 
 // used to change zoom-level of mapbox styles depending on pixel width of users device
@@ -43,6 +49,10 @@ var geocoder = new MapboxGeocoder({
 });
 
 document.getElementById("geocoder").appendChild(geocoder.onAdd(map));
+// Disable the geocoder
+var geocoderInput = document.querySelector(".mapboxgl-ctrl-geocoder input");
+geocoderInput.setAttribute("disabled", "disabled");
+geocoderInput.classList.add("disabled");
 
 // adding mapboxgl popup component to map
 let popup = new mapboxgl.Popup({
@@ -424,8 +434,8 @@ map.on("click", (e) => {
     popup
       .setLngLat(coordinates)
       .setHTML(
-        `<h6><strong>Zip-Code: ${zipCode}</strong></h6><hr style="height:2px;border-width:0;color:gray;background-color:gray"><nobr><strong>City: </strong>${City}</nobr><p><strong>Voter Turnout: </strong>${voterTurnout}%
-        </p>`
+        `<h6><strong>Zip-Code: ${zipCode}</strong></h6><hr style="height:2px;border-width:0;color:gray;background-color:gray"><p><strong>Voter Turnout: </strong>${voterTurnout}%
+        </p><strong>City: </strong>${City}</nobr>`
       )
       .addTo(map);
 

@@ -246,3 +246,8 @@ div.form-check:hover {
 .legend1 {
   display: none;
 }
+
+.mapboxgl-ctrl-geocoder input.disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
