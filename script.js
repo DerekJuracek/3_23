@@ -11,6 +11,8 @@ const map = new mapboxgl.Map({
 });
 document.getElementById("splash-close").addEventListener("click", function () {
   document.getElementById("splash-screen").style.display = "none";
+  const legend1 = document.getElementById("voter-legend");
+  legend1.style.display = "block";
 });
 
 // used to change zoom-level of mapbox styles depending on pixel width of users device
@@ -375,24 +377,35 @@ map.on("click", (e) => {
     const amIndianAlone = properties.Am_Indian;
     const whiteAlone = properties.White_Alon;
     const hisLatAlone = properties.Hispanic_L;
-    // const countyName = properties.CT_NAME.split(",");
-    // const county = countyName[1];
 
     // set lat & lng to popup
     var lat = e.lngLat.lat;
     var lng = e.lngLat.lng;
     var coordinates = [];
     coordinates.push(lng, lat);
-    popup
-      .setLngLat(coordinates)
-      .setHTML(
-        `<h6><strong>${census}</strong></h6><hr style="height:2px;border-width:0;color:gray;background-color:gray"><strong>Median Income: </strong>$${medianIncome}</nobr><p><strong>Voter Turnout: </strong>${voterTurnout}%<br>
+    if (census === undefined) {
+      popup
+        .setLngLat(coordinates)
+        .setHTML(
+          `<h6><strong>No Data</strong></h6><hr style="height:2px;border-width:0;color:gray;background-color:gray"><p><strong>Voter Turnout: </strong>No Data<br><strong>Median Income: </strong>No Data</nobr><br>
+        <nobr><strong>Above Poverty: </strong>No Data</nobr><br><nobr><strong>Below Poverty: </strong>No Data</nobr><br><nobr><strong>Homes w/ at least one 60 year old: </strong>No Data<br>
+       <nobr><strong>Homes w/ at least one child under 18 years old: </strong>No Data<br>
+        <nobr><strong>Homes w/ at least one person w/ Disability: </strong>No Data<nobr><br><strong>Asian Householders: </strong>No Data<nobr><br><strong>Black Householders: </strong>No Data<br><nobr><strong>American Indian Householders: </strong>No Data
+        </nobr><br><nobr><strong>White Householders: </strong>No Data</nobr><br><nobr><strong>Hispanic/Latino Householders: </strong>No Data`
+        )
+        .addTo(map);
+    } else {
+      popup
+        .setLngLat(coordinates)
+        .setHTML(
+          `<h6><strong>${census}</strong></h6><hr style="height:2px;border-width:0;color:gray;background-color:gray"><p><strong>Voter Turnout: </strong>${voterTurnout}%<br><strong>Median Income: </strong>$${medianIncome}</nobr><br>
         <nobr><strong>Above Poverty: </strong>${abovePoverty}% </nobr><br><nobr><strong>Below Poverty: </strong>${belowPoverty}% </nobr><br><nobr><strong>Homes w/ at least one 60 year old: </strong>${over60}%<br>
        <nobr><strong>Homes w/ at least one child under 18 years old: </strong>${childUnder18}% <br>
         <nobr><strong>Homes w/ at least one person w/ Disability: </strong>${disab}%<nobr><br><strong>Asian Householders: </strong>${asianAlone}%<nobr><br><strong>Black Householders: </strong>${blackAlone}%<br><nobr><strong>American Indian Householders: </strong>${amIndianAlone}%
         </nobr><br><nobr><strong>White Householders: </strong>${whiteAlone}%</nobr><br><nobr><strong>Hispanic/Latino Householders: </strong>${hisLatAlone}%`
-      )
-      .addTo(map);
+        )
+        .addTo(map);
+    }
 
     // popup for if zip-code map style id is selected
   } else if (loader === "Zip_Code") {
