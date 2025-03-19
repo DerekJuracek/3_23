@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
     <title>NE Voter Turnout</title>
     <link rel="stylesheet" href="style.css" />
     <link
@@ -21,13 +22,14 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
+  
+
+
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
       integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -38,14 +40,25 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css" type="text/css">
   </head>
   <body>
     <div id="map"></div>
+    <div id="comparison-container">
+      <div id="before" class="map"></div>
+      <div id="after" class="map"></div>
+    </div>
+    <div id="modalContainer"></div> 
     <nav id="menu" class="navbar navbar-expand-lg navbar-light bg-light fixed-top w-100">
       <a class="navbar-brand" href="#"> Nebraska Voter Turnout
         <img src="civiclogo-Black.png" alt="Nebraska Voter Turnout" class="ms-2" height="35" width="35">
       </a>
       <div class="d-flex ml-auto">
+        <div id="swiper-div" style="padding-right: 30px;">
+          <button style="display:none;" id="closeSwiper" class="btn btn-sm btn-primary">Close</button>
+          <button id="swiper" class="btn btn-sm btn-primary">Swiper</button>
+        </div>
         <div id="geocoder"></div>
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle disabled" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="-1">

@@ -63,6 +63,70 @@ let popup = new mapboxgl.Popup({
   anchor: "center",
 });
 
+
+let swipeOn = false;
+const swipe = document.getElementById("swiper");
+
+$(document).ready(function () {
+  $("#modalContainer").load("modal.html", function () {
+    $(".modal-dialog-draggable").draggable({
+      handle: ".modal-header"
+    });
+  });
+});
+
+swipe.addEventListener("click", function (event) {
+    $("#swipeModal").modal("show");
+    $("#swiper").addClass("disabled")
+});
+
+function disableDropdown() {
+  $("#navbarDropdownMenuLink").off("click.dropdown"); 
+  $("#navbarDropdownMenuLink").on("click", function (e) {
+    e.preventDefault(); 
+    e.stopPropagation();
+  });
+}
+
+function enableDropdown() {
+  $("#navbarDropdownMenuLink").off("click"); 
+  $("#navbarDropdownMenuLink").dropdown(); 
+}
+
+$(document).ready(function () {
+  $("body").on("click", "#closeModal", function () {
+    disableDropdown()
+    $("#comparison-container").show()
+    $("#closeSwiper").show()
+    // $("#map").hide()
+    const beforeMap = new mapboxgl.Map({
+      container: 'before',
+      style: 'mapbox://styles/mapbox/light-v11',
+      center: [0, 0],
+      zoom: 0
+  });
+
+  const afterMap = new mapboxgl.Map({
+      container: 'after',
+      style: 'mapbox://styles/mapbox/dark-v11',
+      center: [0, 0],
+      zoom: 0
+  });
+
+
+  const container = '#comparison-container';
+  const compare = new mapboxgl.Compare(beforeMap, afterMap, container);
+
+  $("body").on("click", "#closeSwiper", function () {
+    compare.remove()
+    $("#closeSwiper").hide()
+    $("#swiper").removeClass("disabled")
+    $("#comparison-container").hide()
+    enableDropdown()
+  })
+
+  });
+})
 // variables used to change mapbox styles on input id
 const layerList = document.getElementById("menu");
 const inputs = layerList.getElementsByTagName("input");
