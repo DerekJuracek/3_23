@@ -201,6 +201,8 @@ const legendMap = {
   "clewoj4kq000501nzxujmb2ua": "income-legend",
   "clewnf117001a01pfv1micysu": "belowP-legend",
   "clevcmuzx00a101mgh3v8k4tv": "aboveP-legend",
+  "cm8f2aaw700a501ry5tafeg40":"hs-legend",
+  "cm8f246u000l701s59w596l5c":"bachelors-legend",
   "clewnra2m000701lnes3cxf9s": "disability-legend",
   "clewo1pjf000101o3e3dom768": "plus60-legend",
   "clewodoxw000401pjsyljoonj": "children-legend",
@@ -233,9 +235,9 @@ function updateLegend(layerId) {
     "voter-legend", "voter-legend-2020", "voter-legend-2024", "voter-legendZC", "voter-legendZC-2020", "voter-legendZC-2024",
      "voter-legendC","voter-legendC-2020", "voter-legendC-2024", "voter-legend-VD-CT", "voter-legend-VD-ZC", "voter-legend-VD-C",
     "income-legend",
-    "belowP-legend", "aboveP-legend", "disability-legend", "plus60-legend",
+    "belowP-legend", "aboveP-legend","hs-legend", "bachelors-legend", "disability-legend", "plus60-legend",
     "children-legend", "white-legend", "hl-legend", "asian-legend",
-    "black-legend", "indian-legend"
+    "black-legend", "indian-legend",
   ];
   legends.forEach(id => {
     const legend = document.getElementById(id);
