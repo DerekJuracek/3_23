@@ -48,6 +48,7 @@ div.form-check {
 
 .btn {
   width: 12em;
+  white-space: normal !important;
 }
 
 a#navbarDropdownMenuLink.nav-link.dropdown-toggle {
@@ -272,4 +273,16 @@ div.form-check:hover {
   overflow: hidden;
   position: absolute !important;
   /* position: relative; */
+}
+
+.before-legend {
+  left: 10px; 
+  /* top: 70px; */
+  width: 200px;
+}
+
+.after-legend {
+  right: 10px; 
+  /* top: 70px; */
+  width: 200px;
 }
