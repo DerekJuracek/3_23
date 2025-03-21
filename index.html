@@ -37,7 +37,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.js"></script>
-<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css" type="text/css">
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css" type="text/css">
   </head>
   <body>
     <div id="map"></div>
@@ -53,7 +53,7 @@
       <div class="d-flex ml-auto">
         <div id="swiper-div" style="padding-right: 30px; padding-top: 5px;">
           <button style="display:none;" id="closeSwiper" class="btn btn-sm btn-secondary">Close Compare</button>
-          <button id="swiper" disabled readonly class="btn btn-sm btn-primary">Compare</button>
+          <button id="swiper" disabled readonly class="btn btn-sm btn-primary">Compare Maps</button>
         </div>
         <div id="geocoder"></div>
         <div class="nav-item dropdown">
@@ -136,7 +136,7 @@
 
       <hr class="custom-line">
       <label class="form-check-label center-label" for="" id="dropdown-label">
-        <b>Difference from 2020 - 2024</b> 
+        <b> Turnout Difference from <br> 2020 - 2024</b> 
       </label>
       <hr class="custom-line">
       <div class="form-check">
@@ -158,14 +158,12 @@
       </label>
     </div>
 
-
-
         <hr class="custom-line">
-      <label class="form-check-label center-label" for="clexfr7cx000h01mzika7ykfc" id="dropdown-label">
-        <b>Demographic Maps</b> 
-      </label>
-      <hr class="custom-line">
-      <div class="form-check">
+        <label class="form-check-label center-label" for="clexfr7cx000h01mzika7ykfc" id="dropdown-label">
+          <b>Demographic Maps</b> 
+        </label>
+        <hr class="custom-line">
+        <div class="form-check">
           <input class="form-check-input" type="radio" name="exampleRadios" id="clewoj4kq000501nzxujmb2ua" value="option3">
           <label class="form-check-label" for="exampleRadios2">
             Median HH Income
@@ -187,13 +185,13 @@
      <div class="form-check">
       <input class="form-check-input" type="radio" name="exampleRadios" id="cm8f2aaw700a501ry5tafeg40" value="option5">
       <label class="form-check-label" for="exampleRadios2">
-         Homes that hold at least a HS Degree
+         Individuals >25 years old w/ HS Degree
       </label> 
    </div>
    <div class="form-check">
     <input class="form-check-input" type="radio" name="exampleRadios" id="cm8f246u000l701s59w596l5c" value="option5">
     <label class="form-check-label" for="exampleRadios2">
-       Homes that hold at least a Bachelors Degree
+      Individuals >25 years old w/ Bachelors Degree
     </label> 
  </div>
      <div class="form-check">
@@ -243,241 +241,210 @@
           <label class="form-check-label" for="exampleRadios2">
             American Indian Householders
           </label> 
-        
+        </div>
       </div>
+    </div>
     </nav>
     <div id="legend-master">
       <div id="voter-legend" class="legend1">
-        <h4>Voter Turnout by Census Tract</h4>
-        <div><span style="background-color: #150d3f"></span>0-40%</div>
-        <div><span style="background-color: #8909f1"></span>40-50%</div>
-        <div><span style="background-color: #e8ddf3"></span>50-60%</div>
-        <div><span style="background-color: #f8cfb4"></span>60-70%</div>
-        <div><span style="background-color: #f3885d"></span>70-100%</div>
+        <h4>Voter Turnout by Census Tract 2022</h4>
+        <div><span style="background-color: #150d3f"></span>0% to 40%</div>
+        <div><span style="background-color: #8909f1"></span>40% to 50%</div>
+        <div><span style="background-color: #e8ddf3"></span>50% to 60%</div>
+        <div><span style="background-color: #f8cfb4"></span>60% to 70%</div>
+        <div><span style="background-color: #f3885d"></span>70% to 100%</div>
       </div>
       <div id="voter-legend-2020" class="legend1">
-        <h4>Voter Turnout by Census Tract</h4>
-        <div><span style="background-color: #150d3f"></span>0-40%</div>
-        <div><span style="background-color: #8909f1"></span>40-50%</div>
-        <div><span style="background-color: #e8ddf3"></span>50-60%</div>
-        <div><span style="background-color: #f8cfb4"></span>60-70%</div>
-        <div><span style="background-color: #f3885d"></span>70-100%</div>
+        <h4>Voter Turnout by Census Tract 2020</h4>
+        <div><span style="background-color: #150d3f"></span>0% to 40%</div>
+        <div><span style="background-color: #8909f1"></span>40% to 50%</div>
+        <div><span style="background-color: #e8ddf3"></span>50% to 60%</div>
+        <div><span style="background-color: #f8cfb4"></span>60% to 70%</div>
+        <div><span style="background-color: #f3885d"></span>70% to 100%</div>
       </div>
       <div id="voter-legend-2024" class="legend1">
-        <h4>Voter Turnout by Census Tract</h4>
-        <div><span style="background-color: #150d3f"></span>0-40%</div>
-        <div><span style="background-color: #8909f1"></span>40-50%</div>
-        <div><span style="background-color: #e8ddf3"></span>50-60%</div>
-        <div><span style="background-color: #f8cfb4"></span>60-70%</div>
-        <div><span style="background-color: #f3885d"></span>70-100%</div>
+        <h4>Voter Turnout by Census Tract 2024</h4>
+        <div><span style="background-color: #150d3f"></span>0% to 40%</div>
+        <div><span style="background-color: #8909f1"></span>40% to 50%</div>
+        <div><span style="background-color: #e8ddf3"></span>50% to 60%</div>
+        <div><span style="background-color: #f8cfb4"></span>60% to 70%</div>
+        <div><span style="background-color: #f3885d"></span>70% to 100%</div>
       </div>
       <div id="voter-legendZC" class="legend2">
-        <h4>Voter Turnout by Zip-Code</h4>
-        <div><span style="background-color: #150d3f"></span>0-40%</div>
-        <div><span style="background-color: #8909f1"></span>40-50%</div>
-        <div><span style="background-color: #e8ddf3"></span>50-60%</div>
-        <div><span style="background-color: #f8cfb4"></span>60-70%</div>
-        <div><span style="background-color: #f3885d"></span>70-100%</div>
+        <h4>Voter Turnout by Zip-Code 2022</h4>
+        <div><span style="background-color: #150d3f"></span>0% to 40%</div>
+        <div><span style="background-color: #8909f1"></span>40% to 50%</div>
+        <div><span style="background-color: #e8ddf3"></span>50% to 60%</div>
+        <div><span style="background-color: #f8cfb4"></span>60% to 70%</div>
+        <div><span style="background-color: #f3885d"></span>70% to 100%</div>
       </div>
       <div id="voter-legendZC-2020" class="legend2">
-        <h4>Voter Turnout by Zip-Code</h4>
-        <div><span style="background-color: #150d3f"></span>0-40%</div>
-        <div><span style="background-color: #8909f1"></span>40-50%</div>
-        <div><span style="background-color: #e8ddf3"></span>50-60%</div>
-        <div><span style="background-color: #f8cfb4"></span>60-70%</div>
-        <div><span style="background-color: #f3885d"></span>70-100%</div>
+        <h4>Voter Turnout by Zip-Code 2020</h4>
+        <div><span style="background-color: #150d3f"></span>0% to 40%</div>
+        <div><span style="background-color: #8909f1"></span>40% to 50%</div>
+        <div><span style="background-color: #e8ddf3"></span>50% to 60%</div>
+        <div><span style="background-color: #f8cfb4"></span>60% to 70%</div>
+        <div><span style="background-color: #f3885d"></span>70% to 100%</div>
       </div>
       <div id="voter-legendZC-2024" class="legend2">
-        <h4>Voter Turnout by Zip-Code</h4>
-        <div><span style="background-color: #150d3f"></span>0-40%</div>
-        <div><span style="background-color: #8909f1"></span>40-50%</div>
-        <div><span style="background-color: #e8ddf3"></span>50-60%</div>
-        <div><span style="background-color: #f8cfb4"></span>60-70%</div>
-        <div><span style="background-color: #f3885d"></span>70-100%</div>
+        <h4>Voter Turnout by Zip-Code 2024</h4>
+        <div><span style="background-color: #150d3f"></span>0% to 40%</div>
+        <div><span style="background-color: #8909f1"></span>40% to 50%</div>
+        <div><span style="background-color: #e8ddf3"></span>50% to 60%</div>
+        <div><span style="background-color: #f8cfb4"></span>60% to 70%</div>
+        <div><span style="background-color: #f3885d"></span>70% to 100%</div>
       </div>
       <div id="voter-legendC" class="legend3">
-        <h4>Voter Turnout by County</h4>
-        <div><span style="background-color: #150d3f"></span>0-40%</div>
-        <div><span style="background-color: #8909f1"></span>40-50%</div>
-        <div><span style="background-color: #e8ddf3"></span>50-60%</div>
-        <div><span style="background-color: #f8cfb4"></span>60-70%</div>
-        <div><span style="background-color: #f3885d"></span>70-100%</div>
+        <h4>Voter Turnout by County 2022</h4>
+        <div><span style="background-color: #150d3f"></span>0% to 40%</div>
+        <div><span style="background-color: #8909f1"></span>40% to 50%</div>
+        <div><span style="background-color: #e8ddf3"></span>50% to 60%</div>
+        <div><span style="background-color: #f8cfb4"></span>60% to 70%</div>
+        <div><span style="background-color: #f3885d"></span>70% to 100%</div>
       </div>
       <div id="voter-legendC-2020" class="legend3">
-        <h4>Voter Turnout by County</h4>
-        <div><span style="background-color: #150d3f"></span>0-40%</div>
-        <div><span style="background-color: #8909f1"></span>40-50%</div>
-        <div><span style="background-color: #e8ddf3"></span>50-60%</div>
-        <div><span style="background-color: #f8cfb4"></span>60-70%</div>
-        <div><span style="background-color: #f3885d"></span>70-100%</div>
+        <h4>Voter Turnout by County 2020</h4>
+        <div><span style="background-color: #150d3f"></span>0% to 40%</div>
+        <div><span style="background-color: #8909f1"></span>40% to 50%</div>
+        <div><span style="background-color: #e8ddf3"></span>50% to 60%</div>
+        <div><span style="background-color: #f8cfb4"></span>60% to 70%</div>
+        <div><span style="background-color: #f3885d"></span>70% to 100%</div>
       </div>
       <div id="voter-legendC-2024" class="legend3">
-        <h4>Voter Turnout by County</h4>
-        <div><span style="background-color: #150d3f"></span>0-40%</div>
-        <div><span style="background-color: #8909f1"></span>40-50%</div>
-        <div><span style="background-color: #e8ddf3"></span>50-60%</div>
-        <div><span style="background-color: #f8cfb4"></span>60-70%</div>
-        <div><span style="background-color: #f3885d"></span>70-100%</div>
+        <h4>Voter Turnout by County 2024</h4>
+        <div><span style="background-color: #150d3f"></span>0% to 40%</div>
+        <div><span style="background-color: #8909f1"></span>40% to 50%</div>
+        <div><span style="background-color: #e8ddf3"></span>50% to 60%</div>
+        <div><span style="background-color: #f8cfb4"></span>60% to 70%</div>
+        <div><span style="background-color: #f3885d"></span>70% to 100%</div>
       </div>
       <div id="voter-legend-VD-CT" class="legend3">
         <h4>Voter Turnout <br> Census Tract Difference 2020 - 2024</h4>
-        <div><span style="background-color: #150d3f"></span>>-5.0%</div>
-        <div><span style="background-color: #8909f1"></span>-5.0-2.5%</div>
-        <div><span style="background-color: #e8ddf3"></span>-2.5-0%</div>
-        <div><span style="background-color: #f8cfb4"></span>0-2.5%</div>
-        <div><span style="background-color: #f3885d"></span>2.5-5.0%</div>
+        <div><span style="background-color: #150d3f"></span>&lt;-5.0%</div>
+        <div><span style="background-color: #8909f1"></span>-5.0% to -2.5%</div>
+        <div><span style="background-color: #e8ddf3"></span>-2.5% to 0%</div>
+        <div><span style="background-color: #f8cfb4"></span>0% to 2.5%</div>
+        <div><span style="background-color: #f3885d"></span>2.5% to 5.0%</div>
       </div>
       <div id="voter-legend-VD-ZC" class="legend3">
         <h4>Voter Turnout <br> Zip-Code Difference 2020 - 2024</h4>
-        <div><span style="background-color: #150d3f"></span>>-5.0%</div>
-        <div><span style="background-color: #8909f1"></span>-5.0-2.5%</div>
-        <div><span style="background-color: #e8ddf3"></span>-2.5-0%</div>
-        <div><span style="background-color: #f8cfb4"></span>0-2.5%</div>
-        <div><span style="background-color: #f3885d"></span>2.5-5.0%</div>
+        <div><span style="background-color: #150d3f"></span>&lt;-5.0%</div>
+        <div><span style="background-color: #8909f1"></span>-5.0% to -2.5%</div>
+        <div><span style="background-color: #e8ddf3"></span>-2.5% to 0%</div>
+        <div><span style="background-color: #f8cfb4"></span>0% to 2.5%</div>
+        <div><span style="background-color: #f3885d"></span>2.5% to 5.0%</div>
       </div>
       <div id="voter-legend-VD-C" class="legend3">
         <h4>Voter Turnout <br> County Difference 2020 - 2024</h4>
-        <div><span style="background-color: #150d3f"></span>>-5.0%</div>
-        <div><span style="background-color: #8909f1"></span>-5.0-2.5%</div>
-        <div><span style="background-color: #e8ddf3"></span>-2.5-0%</div>
-        <div><span style="background-color: #f8cfb4"></span>0-2.5%</div>
-        <div><span style="background-color: #f3885d"></span>2.5-5.0%</div>
+        <div><span style="background-color: #150d3f"></span>&lt;-5.0%</div>
+        <div><span style="background-color: #8909f1"></span>-5.0% to -2.5%</div>
+        <div><span style="background-color: #e8ddf3"></span>-2.5% to 0%</div>
+        <div><span style="background-color: #f8cfb4"></span>0% to 2.5%</div>
+        <div><span style="background-color: #f3885d"></span>2.5% to 5.0%</div>
       </div>
       <div id="income-legend" class="legend4">
         <h4>Median Income</h4>
-        <div>
-          <span style="background-color: #150d3f"></span>$20,000-$40,000
-        </div>
-        <div>
-          <span style="background-color: #8909f1"></span>$40,000-$50,000
-        </div>
-        <div>
-          <span style="background-color: #e8ddf3"></span>$50,000-$60,000
-        </div>
-        <div>
-          <span style="background-color: #f8cfb4"></span>$60,000-$75,000
-        </div>
-        <div><span style="background-color: #f3885e"></span>$75,000 and Greater</div>
+        <div><span style="background-color: #150d3f"></span>$20,000 to $40,000</div>
+        <div><span style="background-color: #8909f1"></span>$40,000 to $50,000</div>
+        <div><span style="background-color: #e8ddf3"></span>$50,000 to $60,000</div>
+        <div><span style="background-color: #f8cfb4"></span>$60,000 to $75,000</div>
+        <div><span style="background-color: #f3885e"></span>&gt;$75,000</div>
       </div>
       <div id="belowP-legend" class="legend5">
         <h4>Below Poverty Level</h4>
-        <div><span style="background-color: #150d3f"></span>0-10%</div>
-        <div><span style="background-color: #8909f1"></span>10-20%</div>
-        <div><span style="background-color: #e8ddf3"></span>20-25%</div>
-        <div><span style="background-color: #f8cfb4"></span>25-30%</div>
-        <div>
-          <span style="background-color: #f3885e"></span>30% and Greater
-        </div>
+        <div><span style="background-color: #150d3f"></span>0% to 10%</div>
+        <div><span style="background-color: #8909f1"></span>10% to 20%</div>
+        <div><span style="background-color: #e8ddf3"></span>20% to 25%</div>
+        <div><span style="background-color: #f8cfb4"></span>25% to 30%</div>
+        <div><span style="background-color: #f3885e"></span>&gt;30%</div>
       </div>
       <div id="aboveP-legend" class="legend6">
         <h4>Above Poverty Level</h4>
-        <div><span style="background-color: #150d3f"></span>0-65%</div>
-        <div><span style="background-color: #8909f1"></span>65-75%</div>
-        <div><span style="background-color: #e8ddf3"></span>75-85%</div>
-        <div><span style="background-color: #f8cfb4"></span>85-95%</div>
-        <div>
-          <span style="background-color: #f3885e"></span>95% and Greater
-        </div>
+        <div><span style="background-color: #150d3f"></span>0% to 65%</div>
+        <div><span style="background-color: #8909f1"></span>65% to 75%</div>
+        <div><span style="background-color: #e8ddf3"></span>75% to 85%</div>
+        <div><span style="background-color: #f8cfb4"></span>85% to 95%</div>
+        <div><span style="background-color: #f3885e"></span>&gt;95%</div>
       </div>
       <div id="hs-legend" class="legend6">
-        <h4>Homes w/ at least HS Degree</h4>
-        <div><span style="background-color: #150d3f"></span>60-70%</div>
-        <div><span style="background-color: #8909f1"></span>70-80%</div>
-        <div><span style="background-color: #e8ddf3"></span>80-90%</div>
-        <div><span style="background-color: #f8cfb4"></span>90-95%</div>
-        <div>
-          <span style="background-color: #f3885e"></span>95% and Greater
-        </div>
+        <h4>Homes w/ a HS Degree</h4>
+        <div><span style="background-color: #150d3f"></span>60% to 70%</div>
+        <div><span style="background-color: #8909f1"></span>70% to 80%</div>
+        <div><span style="background-color: #e8ddf3"></span>80% to 90%</div>
+        <div><span style="background-color: #f8cfb4"></span>90% to 95%</div>
+        <div><span style="background-color: #f3885e"></span>&gt;95%</div>
       </div>
       <div id="bachelors-legend" class="legend6">
-        <h4>Homes w/ at Bachelors Degree</h4>
-        <div><span style="background-color: #150d3f"></span>0-10%</div>
-        <div><span style="background-color: #8909f1"></span>10-20%</div>
-        <div><span style="background-color: #e8ddf3"></span>20-30%</div>
-        <div><span style="background-color: #f8cfb4"></span>30-40%</div>
-        <div>
-          <span style="background-color: #f3885e"></span>40% and Greater
-        </div>
+        <h4>Homes w/ a Bachelors Degree</h4>
+        <div><span style="background-color: #150d3f"></span>0% to 10%</div>
+        <div><span style="background-color: #8909f1"></span>10% to 20%</div>
+        <div><span style="background-color: #e8ddf3"></span>20% to 30%</div>
+        <div><span style="background-color: #f8cfb4"></span>30% to 40%</div>
+        <div><span style="background-color: #f3885e"></span>&gt;40%</div>
       </div>
       <div id="disability-legend" class="legend7">
         <h4>Homes w/ Person w/ Disability</h4>
-        <div><span style="background-color: #150d3f"></span>0-20%</div>
-        <div><span style="background-color: #8909f1"></span>20-30%</div>
-        <div><span style="background-color: #e8ddf3"></span>30-35%</div>
-        <div><span style="background-color: #f8cfb4"></span>35-40%</div>
-        <div>
-          <span style="background-color: #f3885e"></span>40% and Greater
-        </div>
+        <div><span style="background-color: #150d3f"></span>0% to 20%</div>
+        <div><span style="background-color: #8909f1"></span>20% to 30%</div>
+        <div><span style="background-color: #e8ddf3"></span>30% to 35%</div>
+        <div><span style="background-color: #f8cfb4"></span>35% to 40%</div>
+        <div><span style="background-color: #f3885e"></span>&gt;40%</div>
       </div>
       <div id="plus60-legend" class="legend8">
         <h4>Homes w/ Person Over 60</h4>
-        <div><span style="background-color: #150d3f"></span>0-20%</div>
-        <div><span style="background-color: #8909f1"></span>20-30%</div>
-        <div><span style="background-color: #e8ddf3"></span>30-40%</div>
-        <div><span style="background-color: #f8cfb4"></span>40-50%</div>
-        <div>
-          <span style="background-color: #f3885e"></span>50% and Greater
-        </div>
+        <div><span style="background-color: #150d3f"></span>0% to 20%</div>
+        <div><span style="background-color: #8909f1"></span>20% to 30%</div>
+        <div><span style="background-color: #e8ddf3"></span>30% to 40%</div>
+        <div><span style="background-color: #f8cfb4"></span>40% to 50%</div>
+        <div><span style="background-color: #f3885e"></span>&gt;50%</div>
       </div>
       <div id="children-legend" class="legend9">
         <h4>Homes w/ Children under 18</h4>
-        <div><span style="background-color: #150d3f"></span>0-15%</div>
-        <div><span style="background-color: #8909f1"></span>15-25%</div>
-        <div><span style="background-color: #e8ddf3"></span>25-45%</div>
-        <div><span style="background-color: #f8cfb4"></span>45-60%</div>
-        <div>
-          <span style="background-color: #f3885e"></span>60% and Greater
-        </div>
+        <div><span style="background-color: #150d3f"></span>0% to 15%</div>
+        <div><span style="background-color: #8909f1"></span>15% to 25%</div>
+        <div><span style="background-color: #e8ddf3"></span>25% to 45%</div>
+        <div><span style="background-color: #f8cfb4"></span>45% to 60%</div>
+        <div><span style="background-color: #f3885e"></span>&gt;60%</div>
       </div>
       <div id="white-legend" class="legend10">
         <h4>White Households Alone</h4>
-        <div><span style="background-color: #150d3f"></span>0-80%</div>
-        <div><span style="background-color: #8909f1"></span>80-85%</div>
-        <div><span style="background-color: #e8ddf3"></span>85-90%</div>
-        <div><span style="background-color: #f8cfb4"></span>90-95%</div>
-        <div>
-          <span style="background-color: #f3885e"></span>95% and Greater
-        </div>
+        <div><span style="background-color: #150d3f"></span>0% to 80%</div>
+        <div><span style="background-color: #8909f1"></span>80% to 85%</div>
+        <div><span style="background-color: #e8ddf3"></span>85% to 90%</div>
+        <div><span style="background-color: #f8cfb4"></span>90% to 95%</div>
+        <div><span style="background-color: #f3885e"></span>&gt;95%</div>
       </div>
       <div id="hl-legend" class="legend11">
         <h4>Hispanic/Latino Households Alone</h4>
-        <div><span style="background-color: #150d3f"></span>0-5%</div>
-        <div><span style="background-color: #8909f1"></span>5-10%</div>
-        <div><span style="background-color: #e8ddf3"></span>10-15%</div>
-        <div><span style="background-color: #f8cfb4"></span>15-20%</div>
-        <div>
-          <span style="background-color: #f3885e"></span>20% and Greater
-        </div>
+        <div><span style="background-color: #150d3f"></span>0% to 5%</div>
+        <div><span style="background-color: #8909f1"></span>5% to 10%</div>
+        <div><span style="background-color: #e8ddf3"></span>10% to 15%</div>
+        <div><span style="background-color: #f8cfb4"></span>15% to 20%</div>
+        <div><span style="background-color: #f3885e"></span>&gt;20%</div>
       </div>
       <div id="asian-legend" class="legend12">
         <h4>Asian Households Alone</h4>
-        <div><span style="background-color: #150d3f"></span>0-1%</div>
-        <div><span style="background-color: #8909f1"></span>1-2%</div>
-        <div><span style="background-color: #e8ddf3"></span>2-5%</div>
-        <div><span style="background-color: #f8cfb4"></span>5-10%</div>
-        <div>
-          <span style="background-color: #f3885e"></span>10% and Greater
-        </div>
+        <div><span style="background-color: #150d3f"></span>0% to 1%</div>
+        <div><span style="background-color: #8909f1"></span>1% to 2%</div>
+        <div><span style="background-color: #e8ddf3"></span>2% to 5%</div>
+        <div><span style="background-color: #f8cfb4"></span>5% to 10%</div>
+        <div><span style="background-color: #f3885e"></span>&gt;10%</div>
       </div>
       <div id="black-legend" class="legend13">
         <h4>Black Households Alone</h4>
-        <div><span style="background-color: #150d3f"></span>0-0.5%</div>
-        <div><span style="background-color: #8909f1"></span>0.5-1%</div>
-        <div><span style="background-color: #e8ddf3"></span>1-5%</div>
-        <div><span style="background-color: #f8cfb4"></span>5-10%</div>
-        <div>
-          <span style="background-color: #f3885e"></span>10% and Greater
-        </div>
+        <div><span style="background-color: #150d3f"></span>0% to 0.5%</div>
+        <div><span style="background-color: #8909f1"></span>0.5% to 1%</div>
+        <div><span style="background-color: #e8ddf3"></span>1% to 5%</div>
+        <div><span style="background-color: #f8cfb4"></span>5% to 10%</div>
+        <div><span style="background-color: #f3885e"></span>&gt;10%</div>
       </div>
       <div id="indian-legend" class="legend14">
         <h4>Am. Indian Households Alone</h4>
-        <div><span style="background-color: #150d3f"></span>0-1%</div>
-        <div><span style="background-color: #8909f1"></span>1-2%</div>
-        <div><span style="background-color: #e8ddf3"></span>2-5%</div>
-        <div><span style="background-color: #f8cfb4"></span>5-10%</div>
-        <div>
-          <span style="background-color: #f3885e"></span>10% and Greater
-        </div>
+        <div><span style="background-color: #150d3f"></span>0% to 1%</div>
+        <div><span style="background-color: #8909f1"></span>1% to 2%</div>
+        <div><span style="background-color: #e8ddf3"></span>2% to 5%</div>
+        <div><span style="background-color: #f8cfb4"></span>5% to 10%</div>
+        <div><span style="background-color: #f3885e"></span>&gt;10%</div>
       </div>
       <div id="splash-screen">
         <div id="splash-content">

@@ -66,13 +66,22 @@ var beforeMapSelected = false
 var afterMapSelected = false
 
 function checkCompareButton() {
-  if (beforeMapSelected && afterMapSelected) {
-    $("#closeModal").removeAttr('disabled')
-  } else {
-    $("#closeModal").attr('disabled')
+   if (beforeMapSelected && afterMapSelected) {
     $("#closeModal")
-    .attr("title", "Before Map and After Map Selection Required")
-    // .css("cursor", "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path fill=\"red\" d=\"M12 2L2 12h6v10h8V12h6L12 2z\"/></svg>') 12 12, auto");
+      .removeAttr("disabled")
+      .removeAttr("readonly")
+      .attr("title", "Start Comparison")
+      .css("cursor", "pointer");
+  } else {
+    $("#closeModal")
+      .attr("disabled", "disabled")
+      .attr("readonly", "true")
+      .attr("title", 'Before Map and After Map Selection Required!!!')
+      .css("cursor", "not-allowed")
+      // .css(
+      //   "cursor",
+      //   "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJyZWQiIGQ9Ik0xOSA2LjQxTDE3LjU5IDUgMTIgMTAuNTkgNi40MSA1IDUgNi40MSAxMC41OSAxMiA1IDE3LjU5IDYuNDEgMTkgMTIgMTMuNDEgMTcuNTkgMTkgMTkgMTcuNTkgMTMuNDEgMTJ6Ii8+PC9zdmc+') 12 12, auto"
+      // );
   }
 }
 
@@ -114,13 +123,25 @@ $(document).ready(function () {
   $("#modalContainer").load("modal.html", function () {
     $(".modal-dialog-draggable").draggable({
       handle: ".modal-header",
+
     });
   });
 });
 
+$(document).ready(function () {
+  $("body").on("click", ".close", function () {
+    $("#swiper").removeClass("disabled");
+  })
+})
+
 const swipe = document.getElementById("swiper");
 swipe.addEventListener("click", function (event) {
-  $("#swipeModal").modal("show");
+  $("#swipeModal").modal({
+    backdrop: "static", // Prevents closing when clicking outside
+    keyboard: false,    // Optional: Prevents closing with Esc key
+  });
+
+  // $("#swipeModal").modal("show");
   $("#swiper").addClass("disabled");
 });
 
@@ -136,6 +157,8 @@ function enableDropdown() {
   $("#navbarDropdownMenuLink").off("click");
   $("#navbarDropdownMenuLink").dropdown();
 }
+
+
 
 $(document).ready(function () {
   $("body").on("click", "#closeModal", function () {
