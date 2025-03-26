@@ -21,7 +21,7 @@ document.getElementById("splash-close").addEventListener("click", function () {
   const dropdownToggle = document.getElementById("navbarDropdownMenuLink");
   dropdownToggle.classList.remove("disabled");
   dropdownToggle.removeAttribute("tabindex");
-  const legend1 = document.getElementById("voter-legend");
+  const legend1 = document.getElementById("voter-legend-2024");
   legend1.style.display = "block";
   var geocoderInput = document.querySelector(".mapboxgl-ctrl-geocoder input");
   geocoderInput.removeAttribute("disabled");
@@ -203,6 +203,7 @@ $(document).ready(function () {
       enableDropdown();
 
       const selectedInput = document.querySelector("#menu input:checked");
+      console.log(selectedInput)
       if (selectedInput) updateLegend(selectedInput.id);
     });
   });
