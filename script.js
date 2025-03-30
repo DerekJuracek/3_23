@@ -6,14 +6,17 @@ let afterMapValue = null;
 let swipeOn = false;
 let beforeMap, afterMap, compare;
 
+
+
 const map = new mapboxgl.Map({
   container: "map",
-  style: "mapbox://styles/civicnebraska/clexfr7cx000h01mzika7ykfc",
+  style: "mapbox://styles/civicnebraska/cm8eq6bp600xt01s5eru42ebf",
   center: [-99.60554664374831, 41.478777848167454],
   zoom: 5.9,
-  projection: "globe",
+  // projection: "globe",
   customAttribution: "Civic Nebraska",
 });
+
 
 document.getElementById("splash-close").addEventListener("click", function () {
   document.getElementById("splash-screen").style.display = "none";
@@ -38,6 +41,18 @@ map.on("load", function () {
     curve: 1,
   });
 });
+
+
+// Change the cursor to a pointer when the it enters a feature in the 'circle' layer.
+// map.on('mouseenter', 'circle', () => {
+//   map.getCanvas().style.cursor = 'pointer';
+// });
+
+// // Change it back to a pointer when it leaves.
+// map.on('mouseleave', 'circle', () => {
+//   map.getCanvas().style.cursor = '';
+// });
+
 
 const nav = new mapboxgl.NavigationControl({
   visualizePitch: true,
@@ -78,10 +93,6 @@ function checkCompareButton() {
       .attr("readonly", "true")
       .attr("title", 'Before Map and After Map Selection Required!!!')
       .css("cursor", "not-allowed")
-      // .css(
-      //   "cursor",
-      //   "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJyZWQiIGQ9Ik0xOSA2LjQxTDE3LjU5IDUgMTIgMTAuNTkgNi40MSA1IDUgNi40MSAxMC41OSAxMiA1IDE3LjU5IDYuNDEgMTkgMTIgMTMuNDEgMTcuNTkgMTkgMTkgMTcuNTkgMTMuNDEgMTJ6Ii8+PC9zdmc+') 12 12, auto"
-      // );
   }
 }
 
@@ -141,7 +152,6 @@ swipe.addEventListener("click", function (event) {
     keyboard: false,    // Optional: Prevents closing with Esc key
   });
 
-  // $("#swipeModal").modal("show");
   $("#swiper").addClass("disabled");
 });
 
@@ -281,10 +291,12 @@ for (const input of inputs) {
   };
 }
 
+
+
 map.on("click", (e) => {
   const loader = map.getStyle().name;
   console.log(loader);
-  if (loader !== "Zip_Code" && loader !== "County") {
+  if (loader.indexOf("zip_code") == -1 && loader.indexOf("counties") == -1) {
     const features = map.queryRenderedFeatures(e.point, {});
     console.log(features);
 
@@ -330,7 +342,7 @@ map.on("click", (e) => {
         )
         .addTo(map);
     }
-  } else if (loader === "Zip_Code") {
+  } else if (loader.indexOf("zip_code") > -1) {
     const features = map.queryRenderedFeatures(e.point, {});
     console.log(features);
     const properties = features[0].properties;
