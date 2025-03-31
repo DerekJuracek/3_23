@@ -141,6 +141,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $("body").on("click", ".close", function () {
+    console.log('close modal clicked')
     $("#swiper").removeClass("disabled");
   })
 })
@@ -148,8 +149,8 @@ $(document).ready(function () {
 const swipe = document.getElementById("swiper");
 swipe.addEventListener("click", function (event) {
   $("#swipeModal").modal({
-    backdrop: "static", // Prevents closing when clicking outside
-    keyboard: false,    // Optional: Prevents closing with Esc key
+    backdrop: "static", 
+    keyboard: false,    
   });
 
   $("#swiper").addClass("disabled");
@@ -305,6 +306,8 @@ map.on("click", (e) => {
     const voterTurnout = properties.Voter_Turn;
     const medianIncome = properties.Median_Inc;
     const over60 = properties.Over_60;
+    const HsDegree = properties.pct_hs_deg ? properties.pct_hs_deg :  properties.pct_hs_or_;
+    const BaDegree = properties.pct_bach_d ? properties.pct_bach_d : properties.pct_bach_o;
     const disab = properties.Household_;
     const childUnder18 = properties.Child_Unde;
     const abovePoverty = properties.Above_Pov;
@@ -325,6 +328,7 @@ map.on("click", (e) => {
         .setHTML(
           `<h6><strong>No Data</strong></h6><hr style="height:2px;border-width:0;color:gray;background-color:gray"><p><strong>Voter Turnout: </strong>No Data<br><strong>Median Income: </strong>No Data</nobr><br>
         <nobr><strong>Above Poverty: </strong>No Data</nobr><br><nobr><strong>Below Poverty: </strong>No Data</nobr><br><nobr><strong>Homes w/ at least one 60 year old: </strong>No Data<br>
+                <nobr><strong>Possessing a HS Diploma: </strong>No Data <br> <nobr><strong>Possessing a Bachelors Degree: </strong>No Data <br>
        <nobr><strong>Homes w/ at least one child under 18 years old: </strong>No Data<br>
         <nobr><strong>Homes w/ at least one person w/ Disability: </strong>No Data<nobr><br><strong>Asian Householders: </strong>No Data<nobr><br><strong>Black Householders: </strong>No Data<br><nobr><strong>American Indian Householders: </strong>No Data
         </nobr><br><nobr><strong>White Householders: </strong>No Data</nobr><br><nobr><strong>Hispanic/Latino Householders: </strong>No Data`
@@ -336,6 +340,7 @@ map.on("click", (e) => {
         .setHTML(
           `<h6><strong>${census}</strong></h6><hr style="height:2px;border-width:0;color:gray;background-color:gray"><p><strong>Voter Turnout: </strong>${voterTurnout}%<br><strong>Median Income: </strong>$${medianIncome}</nobr><br>
         <nobr><strong>Above Poverty: </strong>${abovePoverty}% </nobr><br><nobr><strong>Below Poverty: </strong>${belowPoverty}% </nobr><br><nobr><strong>Homes w/ at least one 60 year old: </strong>${over60}%<br>
+        <nobr><strong>Possessing a HS Diploma: </strong>${HsDegree}% <br> <nobr><strong>Possessing a Bachelors Degree: </strong>${BaDegree}% <br>
        <nobr><strong>Homes w/ at least one child under 18 years old: </strong>${childUnder18}% <br>
         <nobr><strong>Homes w/ at least one person w/ Disability: </strong>${disab}%<nobr><br><strong>Asian Householders: </strong>${asianAlone}%<nobr><br><strong>Black Householders: </strong>${blackAlone}%<br><nobr><strong>American Indian Householders: </strong>${amIndianAlone}%
         </nobr><br><nobr><strong>White Householders: </strong>${whiteAlone}%</nobr><br><nobr><strong>Hispanic/Latino Householders: </strong>${hisLatAlone}%`
