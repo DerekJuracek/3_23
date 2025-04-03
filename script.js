@@ -1,6 +1,5 @@
 mapboxgl.accessToken = "pk.eyJ1IjoiY2l2aWNuZWJyYXNrYSIsImEiOiJjbGRkaXdnMWowNDBvM3FwNWcybnE2NXhmIn0.KAyFk0TA3OaiUOFCnjXXNA";
 
-// Global variables
 let beforeMapValue = null;
 let afterMapValue = null;
 let swipeOn = false;
@@ -13,7 +12,6 @@ const map = new mapboxgl.Map({
   style: "mapbox://styles/civicnebraska/cm8eq6bp600xt01s5eru42ebf",
   center: [-99.60554664374831, 41.478777848167454],
   zoom: 5.9,
-  // projection: "globe",
   customAttribution: "Civic Nebraska",
 });
 
@@ -42,17 +40,13 @@ map.on("load", function () {
   });
 });
 
+function ClearSelection() {
+  beforeMapValue = null;
+  afterMapValue = null;
+  $("#beforeMapDropdown").val('').text('')
 
-// Change the cursor to a pointer when the it enters a feature in the 'circle' layer.
-// map.on('mouseenter', 'circle', () => {
-//   map.getCanvas().style.cursor = 'pointer';
-// });
 
-// // Change it back to a pointer when it leaves.
-// map.on('mouseleave', 'circle', () => {
-//   map.getCanvas().style.cursor = '';
-// });
-
+}
 
 const nav = new mapboxgl.NavigationControl({
   visualizePitch: true,
@@ -296,11 +290,9 @@ for (const input of inputs) {
 
 map.on("click", (e) => {
   const loader = map.getStyle().name;
-  console.log(loader);
-  if (loader.indexOf("zip_code") == -1 && loader.indexOf("counties") == -1) {
+  if (loader.indexOf("zip_code") == -1 && loader.indexOf("counties") == -1 && loader.indexOf("difference") == -1 && loader.indexOf("Demo") == -1) {
+    // census tracts, no demographic tables or difference
     const features = map.queryRenderedFeatures(e.point, {});
-    console.log(features);
-
     const properties = features[0].properties;
     const census = properties.NAMELSAD;
     const voterTurnout = properties.Voter_Turn;
@@ -347,9 +339,44 @@ map.on("click", (e) => {
         )
         .addTo(map);
     }
-  } else if (loader.indexOf("zip_code") > -1) {
+  } else if (loader.indexOf("Demo") > -1) {
     const features = map.queryRenderedFeatures(e.point, {});
-    console.log(features);
+    const properties = features[0].properties;
+    const census = properties.NAMELSAD;
+    const medianIncome = properties.Median_Inc;
+    const over60 = properties.Over_60;
+    const HsDegree = properties.pct_hs_deg ? properties.pct_hs_deg :  properties.pct_hs_or_;
+    const BaDegree = properties.pct_bach_d ? properties.pct_bach_d : properties.pct_bach_o;
+    const disab = properties.Household_;
+    const childUnder18 = properties.Child_Unde;
+    const abovePoverty = properties.Above_Pov;
+    const belowPoverty = properties.Below_Pov;
+    const blackAlone = properties.Black_Alon;
+    const asianAlone = properties.Asian_Alon;
+    const amIndianAlone = properties.Am_Indian;
+    const whiteAlone = properties.White_Alon;
+    const hisLatAlone = properties.Hispanic_L;
+
+    var lat = e.lngLat.lat;
+    var lng = e.lngLat.lng;
+    var coordinates = [];
+    coordinates.push(lng, lat);
+
+    popup
+    .setLngLat(coordinates)
+    .setHTML(
+      `<h6><strong>${census}</strong></h6><hr style="height:2px;border-width:0;color:gray;background-color:gray"><p><strong>Median Income: </strong>$${medianIncome}</nobr><br>
+    <nobr><strong>Above Poverty: </strong>${abovePoverty}% </nobr><br><nobr><strong>Below Poverty: </strong>${belowPoverty}% </nobr><br><nobr><strong>Homes w/ at least one 60 year old: </strong>${over60}%<br>
+    <nobr><strong>Possessing a HS Diploma: </strong>${HsDegree}% <br> <nobr><strong>Possessing a Bachelors Degree: </strong>${BaDegree}% <br>
+   <nobr><strong>Homes w/ at least one child under 18 years old: </strong>${childUnder18}% <br>
+    <nobr><strong>Homes w/ at least one person w/ Disability: </strong>${disab}%<nobr><br><strong>Asian Householders: </strong>${asianAlone}%<nobr><br><strong>Black Householders: </strong>${blackAlone}%<br><nobr><strong>American Indian Householders: </strong>${amIndianAlone}%
+    </nobr><br><nobr><strong>White Householders: </strong>${whiteAlone}%</nobr><br><nobr><strong>Hispanic/Latino Householders: </strong>${hisLatAlone}%`
+    )
+    .addTo(map);
+
+  } else if (loader.indexOf("zip_code") > -1 && loader.indexOf("difference") == -1) {
+    // zip code, no demographics or difference
+    const features = map.queryRenderedFeatures(e.point, {});
     const properties = features[0].properties;
 
     const zipCode = properties.NAME;
@@ -367,11 +394,106 @@ map.on("click", (e) => {
         </p><strong>City: </strong>${City}</nobr>`
       )
       .addTo(map);
-  } else {
-    const features = map.queryRenderedFeatures(e.point, {});
-    console.log(features);
-    const properties = features[0].properties;
+  }  else if (loader.indexOf("difference") > -1) {
+    // logic for all difference maps
+      if (loader.indexOf("county") > -1) {
+        const features = map.queryRenderedFeatures(e.point, {});
+        console.log(features);
+        const properties = features[0].properties;
+    
+        const CountyName = properties.NAMELSAD;
+        const difference = properties.difference;
+        const Vote_2020 = properties.Voter_Turn;
+        const Vote_2024 = properties.VoterTurn;
+        var lat = e.lngLat.lat;
+        var lng = e.lngLat.lng;
+        var coordinates = [];
+        coordinates.push(lng, lat);
+    
+        popup
+          .setLngLat(coordinates)
+          .setHTML(
+            `<h6><strong>County: ${CountyName}</strong></h6><hr style="height:2px;border-width:0;color:gray;background-color:gray">
+              <nobr><strong>Voter Turnout 2020: </strong>${Vote_2020}% <br>
+              <nobr><strong>Voter Turnout 2024: </strong>${Vote_2024}% <br>
+              <strong>Voter Turnout Difference 2020 - 2024: </strong>${difference}%
+            </p>`
+          )
+          .addTo(map);
+      } else if (loader.indexOf("zip_code") > -1) {
+        // zip code difference
+        const features = map.queryRenderedFeatures(e.point, {});
+        const properties = features[0].properties;
+        const zipCode = properties.NAME;
+        const City = properties.City;
+        const difference = properties.difference;
+        const Vote_2020 = properties.Voter_Turn;
+        const Vote_2024 = properties.VoterTurn;
+        var lat = e.lngLat.lat;
+        var lng = e.lngLat.lng;
+        var coordinates = [];
+        coordinates.push(lng, lat);
+    
+        popup
+        .setLngLat(coordinates)
+        .setHTML(
+          `<h6><strong>Zip-Code: ${zipCode}</strong></h6><hr style="height:2px;border-width:0;color:gray;background-color:gray"><p>
+          </p><strong>City: </strong>${City}</nobr> <br>
+          <nobr><strong>Voter Turnout 2020: </strong>${Vote_2020}% <br>
+          <nobr><strong>Voter Turnout 2024: </strong>${Vote_2024}% <br>
+          <strong>Voter Turnout Difference 2020 - 2024: </strong>${difference}%
+        `
+        )
+        .addTo(map);
+      } else {
+        // census difference
+        const features = map.queryRenderedFeatures(e.point, {});
+        const properties = features[0].properties;
+        const census = properties.NAMELSAD;
+        const Vote_2024 = properties.Voter_Turn;
+        const Vote_2020 = properties.Voter_Tu_1;
+        const difference = properties.difference;
+        const medianIncome = properties.Median_Inc;
+        const over60 = properties.Over_60;
+        const HsDegree = properties.pct_hs_deg ? properties.pct_hs_deg :  properties.pct_hs_or_;
+        const BaDegree = properties.pct_bach_d ? properties.pct_bach_d : properties.pct_bach_o;
+        const disab = properties.Household_;
+        const childUnder18 = properties.Child_Unde;
+        const abovePoverty = properties.Above_Pov;
+        const belowPoverty = properties.Below_Pov;
+        const blackAlone = properties.Black_Alon;
+        const asianAlone = properties.Asian_Alon;
+        const amIndianAlone = properties.Am_Indian;
+        const whiteAlone = properties.White_Alon;
+        const hisLatAlone = properties.Hispanic_L;
+    
+        var lat = e.lngLat.lat;
+        var lng = e.lngLat.lng;
+        var coordinates = [];
+        coordinates.push(lng, lat);
 
+        popup
+        .setLngLat(coordinates)
+        .setHTML(
+          `<h6><strong>${census}</strong></h6><hr style="height:2px;border-width:0;color:gray;background-color:gray"><p>
+          <strong>Voter Turnout 2020: </strong>${Vote_2020}%<br>
+          <strong>Voter Turnout 2024: </strong>${Vote_2024}%<br>
+          <strong>Voter Turnout Difference 2020 - 2024: </strong>${difference}%<br>
+          <strong>Median Income: </strong>$${medianIncome}</nobr><br>
+        <nobr><strong>Above Poverty: </strong>${abovePoverty}% </nobr><br><nobr><strong>Below Poverty: </strong>${belowPoverty}% </nobr><br><nobr><strong>Homes w/ at least one 60 year old: </strong>${over60}%<br>
+        <nobr><strong>Possessing a HS Diploma: </strong>${HsDegree}% <br> <nobr><strong>Possessing a Bachelors Degree: </strong>${BaDegree}% <br>
+       <nobr><strong>Homes w/ at least one child under 18 years old: </strong>${childUnder18}% <br>
+        <nobr><strong>Homes w/ at least one person w/ Disability: </strong>${disab}%<nobr><br><strong>Asian Householders: </strong>${asianAlone}%<nobr><br><strong>Black Householders: </strong>${blackAlone}%<br><nobr><strong>American Indian Householders: </strong>${amIndianAlone}%
+        </nobr><br><nobr><strong>White Householders: </strong>${whiteAlone}%</nobr><br><nobr><strong>Hispanic/Latino Householders: </strong>${hisLatAlone}%`
+        )
+        .addTo(map);
+        
+      }
+  
+  } else {
+    //county no demographics or difference
+    const features = map.queryRenderedFeatures(e.point, {});
+    const properties = features[0].properties;
     const CountyName = properties.NAMELSAD;
     const voterTurnout = properties.VoterTurn;
 
