@@ -135,7 +135,6 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $("body").on("click", ".close", function () {
-    console.log('close modal clicked')
     $("#swiper").removeClass("disabled");
   })
 })
@@ -208,7 +207,6 @@ $(document).ready(function () {
       enableDropdown();
 
       const selectedInput = document.querySelector("#menu input:checked");
-      console.log(selectedInput)
       if (selectedInput) updateLegend(selectedInput.id);
     });
   });
@@ -398,7 +396,6 @@ map.on("click", (e) => {
     // logic for all difference maps
       if (loader.indexOf("county") > -1) {
         const features = map.queryRenderedFeatures(e.point, {});
-        console.log(features);
         const properties = features[0].properties;
     
         const CountyName = properties.NAMELSAD;
